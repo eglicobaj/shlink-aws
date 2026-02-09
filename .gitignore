@@ -1,0 +1,6 @@
+# Env files
+compose/.env
+.env
+
+# Local volumes / docker stuff
+**/db_data

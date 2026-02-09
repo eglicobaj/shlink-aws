@@ -1,0 +1,47 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks: [shlink]
+
+  shlink:
+    image: shlinkio/shlink:stable
+    depends_on: [db]
+    environment:
+      DEFAULT_DOMAIN: ${DEFAULT_DOMAIN}
+      IS_HTTPS_ENABLED: "true"
+      DB_DRIVER: postgres
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      INITIAL_API_KEY: ${SHLINK_API_KEY}
+    networks: [shlink]
+
+  web:
+    image: shlinkio/shlink-web-client:stable
+    environment:
+      SHLINK_SERVER_URL: http://localhost:8081
+      SHLINK_SERVER_API_KEY: ${SHLINK_API_KEY}
+    networks: [shlink]
+
+  nginx:
+    image: nginx:stable
+    depends_on: [shlink, web]
+    ports:
+      - "8081:80"
+    volumes:
+      - ../nginx/conf.d:/etc/nginx/conf.d:ro
+    networks: [shlink]
+
+networks:
+  shlink:
+
+volumes:
+  db_data:
