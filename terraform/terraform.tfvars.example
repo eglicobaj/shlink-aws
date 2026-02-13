@@ -1,0 +1,2 @@
+key_name = "KEYPAIR_NAME"
+# ssh_cidr = "PUBLIC_IP/32"
