@@ -50,6 +50,11 @@ resource "aws_instance" "shlink" {
   key_name               = var.key_name
   vpc_security_group_ids = [aws_security_group.shlink_sg.id]
 
+  root_block_device {
+    volume_size = 8
+    volume_type = "gp3"
+  }
+
   tags = {
     Name = "shlink-aws"
   }
