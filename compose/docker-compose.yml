@@ -35,7 +35,7 @@ services:
     image: nginx:stable
     depends_on: [shlink, web]
     ports:
-      - "8081:80"
+      - "80:80"
     volumes:
       - ../nginx/conf.d:/etc/nginx/conf.d:ro
     networks: [shlink]
