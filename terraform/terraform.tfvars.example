@@ -1,2 +1,4 @@
-key_name = "KEYPAIR_NAME"
-# ssh_cidr = "PUBLIC_IP/32"
+key_name = "shlink-key"
+ssh_cidr = "77.242.19.90/32"
+aws_region = "eu-central-1"
+instance_type = "t3.micro"
