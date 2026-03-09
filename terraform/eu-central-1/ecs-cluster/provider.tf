@@ -1,6 +1,6 @@
 terraform {
   backend "s3" {
-    bucket = "SHLINK_STATE_BUCKET_NAME"
+    bucket = "aws-s3-demo-egli"
     key    = "terraform/eu-central-1/ecs-cluster"
     region = "eu-central-1"
   }
